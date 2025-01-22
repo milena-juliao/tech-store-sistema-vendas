@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['subtotal'])) {
+    $subtotal = $_SESSION['subtotal'];
+    echo "Subtotal: R$ " . number_format($subtotal, 2, ',', '.');
+} else {
+    echo "Erro: Subtotal não encontrado.";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +19,7 @@
 <body>
     <div class="container">
         <h1>Registro de Vendas</h1>
-        <form id="vendaForm">
+        <form id="vendaForm" action="../../src/routes/api.php/registraVendas" method="POST">
             <div class="form-group">
                 <label for="cliente_nome">Nome do Cliente:</label>
                 <input type="text" id="cliente_nome" name="cliente_nome" required>
@@ -23,11 +33,6 @@
             <div class="form-group">
                 <label for="cpf_cnpj">CPF/CNPJ:</label>
                 <input type="text" id="cpf_cnpj" name="cpf_cnpj" maxlength="14">
-            </div>
-
-            <div class="form-group">
-                <label for="data_venda">Data da Venda:</label>
-                <input type="date" id="data_venda" name="data_venda" required>
             </div>
 
             <div class="form-group">
@@ -57,7 +62,7 @@
 
             <div class="form-group">
                 <label for="subtotal">Subtotal:</label>
-                <input type="number" id="subtotal" name="subtotal" step="0.01" required>
+                <input type="number" id="subtotal" name="subtotal" value="<?php echo isset($_SESSION['subtotal']) ? number_format($_SESSION['subtotal'], 2, ',', '.') : '0,00';  ?> step="0.01" required>
             </div>
 
             <button type="submit">Registrar Venda</button>

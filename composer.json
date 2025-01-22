@@ -1,4 +1,10 @@
 {
+    "autoload": {
+        "psr-4": {
+            "TechStore\\": "src/"
+        }
+    },
+
     "require": {
         "vlucas/phpdotenv": "^5.6"
     }

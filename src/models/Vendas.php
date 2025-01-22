@@ -6,7 +6,7 @@ class Venda {
         $this->conn = $db;
     }
 
-    public function listarTodas() {
+    public function listar() {
         $query = "SELECT * FROM vendas";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
